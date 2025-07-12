@@ -1,0 +1,1 @@
+Structural design patterns focus on how objects connect & collaborate. These patterns simplify the relationship between objects by restructuring and makes easy to access, scale & maintain.
