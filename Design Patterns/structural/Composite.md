@@ -1,4 +1,4 @@
-Its a structural design pattern that lets you treat individual objects and groups of objects in the same way. It is useful when you have a tree-like structure — for example, files and folders.
+Its a structural design pattern that lets you treat individual objects and groups of objects in the same way. For example, a folder (component) can contain files (leaves) or other folders (composites), but both respond to the same actions like open(), rename(), etc.
 
 #### Key Points:
 * Problem:
