@@ -80,3 +80,22 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Spring Expression Language (SpEL) — Spring Boot
+    ```java
+    ExpressionParser parser = new SpelExpressionParser();
+    Expression exp = parser.parseExpression("'Hello'.concat(' World')");
+    String message = (String) exp.getValue();  // "Hello World"
+    ```
+    * Grammar/Rules: Spring Expression Language
+    * Interpreter: SpelExpressionParser
+    * Interprets and evaluates the expression at runtime
+
+* Angular — Template Expressions
+    ```html
+    <p>{{ 5 + 3 }}</p>
+    ```
+    * Expression: 5 + 3
+    * Interpreter: Angular template engine
+    * Interpreted at runtime to render value

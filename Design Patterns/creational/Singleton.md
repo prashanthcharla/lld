@@ -52,7 +52,7 @@ public class MySingleton {
 }
 ```
 
-In above, synchronization should be applied to critical section of the code and here object instantiation is the critical section. But it's applied to entire method. For example, if 10 threads accessed method at same time, first thread will apply lock, creates object, returns it and releases lock. Next threads will be in waiting state. For second thread onwards having lock is unnecessary. It creates delay in returning object from second thread till tenth and dealay increases exponentially till it reached 10th thread. 
+In above, synchronization should be applied to critical section of the code and here object instantiation is the critical section. But it's applied to entire method. For example, if 10 threads accessed method at same time, first thread will apply lock, creates object, returns it and releases lock. Next threads will be in waiting state. For second thread onwards having lock is unnecessary. It creates delay in returning object from second thread till tenth thread.
 
 ```java
 public class MySingleton {
@@ -190,3 +190,13 @@ public void useEnumForSingleton() {
     // some logic
 }
 ```
+
+#### Real-time example:
+* Spring Boot's @Service or @Component
+    * Example: When you annotate a class with @Service or @Component, Spring creates one instance per ApplicationContext, making it a singleton.
+        ```java
+        @Service
+        public class UserService { }
+        ```
+    
+        Spring ensures this bean is shared across the app.

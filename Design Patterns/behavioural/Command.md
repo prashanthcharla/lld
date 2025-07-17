@@ -1,7 +1,7 @@
 Behavioural pattern which lets you wrap a request in an objects so that you can pass it around, store it & execute it later. This is useful when you want to separate the code that calls an action from the code that does an action. It helps with
 * Undo/redo
 * Command history
-* Flexible control over actions
+* Flexible control over actions. You execute commands later or in a controlled way.
 
 #### Key Points:
 * Problem:
@@ -111,3 +111,23 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Spring Boot - @Scheduled + Runnable/Command
+    * You want scheduled tasks (commands) to execute at fixed intervals
+        ```java
+        @Component
+        public class DataBackupCommand {
+
+            @Scheduled(cron = "0 0 * * * ?")
+            public void execute() {
+                System.out.println("Running data backup...");
+            }
+        }
+        ```
+        * Command: execute() method with backup logic
+        * Invoker: Spring Scheduler triggers it
+* Undo/Redo in GUI Apps
+    * Each action (like typing, deleting) is a Command object
+    * You can store them in a stack and replay/undo/redo
+

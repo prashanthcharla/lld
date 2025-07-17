@@ -181,3 +181,23 @@ public class Test {
     }
 }
 ```
+
+#### Real-time example:
+* In Spring, when you define a bean with @Scope("prototype"), Spring creates a new instance every time you request the bean.
+    ```java
+    @Component
+    @Scope("prototype")
+    public class Report {
+        // Some fields and methods
+    }
+    ```
+
+    ```java
+    @Autowired
+    private ApplicationContext context;
+
+    public Report createReport() {
+        return context.getBean(Report.class);  // New instance every time — Prototype Pattern
+    }
+    ```
+* Whenever you use @Scope("prototype") in Spring, you're practically applying the Prototype Design Pattern without writing cloning logic yourself.

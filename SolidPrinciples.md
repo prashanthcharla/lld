@@ -251,7 +251,7 @@ In above, we want to open a db connection and not file. But still DaoOperations 
     }
 ```
 ## D - Dependency Inversion Principle
-It states that high level modules should not depend on any specific implementations of low level module. Instead both high level & low level modules should depend on abstractions and interfaces. This promotes loose coupling. With this, if you need to need to change the implementations of low level module, you don't need to change the high level module that depends on it.
+It states that high level modules should not depend on any specific implementations of low level module. Instead both high level & low level modules should depend on abstractions and interfaces. This promotes loose coupling. With this, if you need to change the implementations of low level module, you don't need to change the high level module that depends on it.
 
 Example:
 

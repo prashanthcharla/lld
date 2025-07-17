@@ -21,7 +21,7 @@ Structural design pattern which minimizes memory by sharing the objects which ar
             Role role = new Role("Admin");
         }
         ```
-    * You end up with 1,000,000 Role objects, even though only 3 distinct role types exist.
+    * You end up with 10,00,000 Role objects, even though only 3 distinct role types exist.
         * Roles have the same data, yet you’re duplicating them.
         * This is inefficient and violates DRY (Don't Repeat Yourself).
         * There is a clear intrinsic (shared) part: Role.name
@@ -96,3 +96,17 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* String Pool in Java
+    ```java
+    String s1 = "hello";
+    String s2 = "hello";        
+    System.out.println(s1 == s2);  // true
+    ```
+    * Both s1 and s2 point to the same object in String Pool.
+    * Java shares the String literal instance to save memory.
+* Icon Sharing in Applications
+    * If you have 100 buttons with the same icon,
+        * You don’t load the icon image 100 times
+        * The icon instance is shared — Flyweight pattern in UI libraries

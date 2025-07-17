@@ -111,3 +111,14 @@ public class Test {
     }
 }
 ```
+
+#### Real-time example:
+* In Spring Boot, UriComponentsBuilder is used to build URIs step by step.
+    ```java
+    URI uri = UriComponentsBuilder.fromHttpUrl("https://api.example.com")
+                    .path("/users")
+                    .queryParam("id", 123)
+                    .build()
+    ```
+
+    Here URI is not an immutanble class. Above object can also be created with URI class instead of Builder. 

@@ -1,4 +1,4 @@
-Structural design pattern that lets you add new behavior (features) to an object without changing its original class.
+Structural design pattern that lets you add new behavior (features) to an object without changing its original class. It wraps the object with extra functionality.
 
 #### Key Points:
 * Problem:
@@ -100,3 +100,18 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Spring Boot — HandlerInterceptor
+    * You use HandlerInterceptor to add extra behavior before and after a controller executes.
+        ```java
+        public class LoggingInterceptor implements HandlerInterceptor {
+            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+                System.out.println("Logging request...");
+                return true;
+            }
+        }
+        ```
+
+        The original controller is untouched. You're wrapping it with new behavior (e.g., logging, auth).
+* Similatrly, in Angular also we use HttpInterceptor for modifying HTTP requests/responses by keeping core request same.

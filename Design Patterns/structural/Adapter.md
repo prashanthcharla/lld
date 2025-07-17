@@ -83,3 +83,40 @@ public class Test {
     }
 }
 ```
+
+#### Real-time example:
+* Spring Boot
+    * HttpMessageConverter (Adapter for Request/Response Bodies)
+        * Scenario: Your controller returns a Java Object:
+            ```java
+            @RestController
+            public class UserController {
+                @GetMapping("/user")
+                public User getUser() {
+                    return new User("John");
+                }
+            }
+            ```
+
+            But the client expects JSON.
+    * Spring uses HttpMessageConverter to adapt your Java object to JSON.
+* Angular
+    * HttpInterceptor (Adapting HTTP Requests)
+    * Scenario: You want to add a token to every HTTP request without changing each request manually.
+
+        You write an Adapter (Interceptor):
+        ```ts
+        @Injectable()
+        export class AuthInterceptor implements HttpInterceptor {
+            intercept(req: HttpRequest<any>, next: HttpHandler) {
+                const modifiedReq = req.clone({
+                headers: req.headers.set('Authorization', 'Bearer token')
+                });
+                return next.handle(modifiedReq);
+            }
+        }
+        ```
+    * Here
+        * Adaptee: Original HTTP Request
+        * Target: Modified HTTP Request (with token)
+        * Adapter: HttpInterceptor

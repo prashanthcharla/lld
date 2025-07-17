@@ -72,3 +72,12 @@ public class Test {
     }
 }
 ```
+
+#### Real-time example:
+* Angular's HttpClient
+    * Example: The HttpClient is provided by HttpClientModule, and Angular’s DI system creates it using a factory under the hood when you inject it.
+        ```ts
+        constructor(private http: HttpClient) { }
+        ```
+    
+        Angular decides how to create HttpClient, you just consume it.

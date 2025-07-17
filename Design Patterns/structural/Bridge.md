@@ -2,24 +2,22 @@ Structural design pattern that separates abstraction (what it does) from its imp
 
 #### Key Points:
 * Problem
+    * You need to apply color to a shape.
     * There are two axes of change:
-        * Shape hierarchy: Shape → Circle, Shape → Square, etc.
-        * Color hierarchy: Red, Blue, etc.
+        * Shape hierarchy: Shape → Circle, Shape → Square, etc. (one to many)
+        * Color hierarchy: Red, Blue, etc. (one to many)
     * If we tightly combine both, we end up with an explosion of classes like:
         * RedCircle
         * BlueCircle
         * RedSquare
         * BlueSquare...and it keeps growing as you add more shapes or more colors.
 * Problem Analysis:
-    * If we observe carefully, there are two relationships being forced:
-        * Shape "is a" Circle. ✅ (Correct — Circle is a Shape)
-        * Circle "is a" RedCircle. ❌ (Incorrect — Color isn't a type of Shape)
-    * This is misleading, because:
-        * The shape concept is completely different from color.
-        * But in the wrong design (Problem), we're bundling color inside the shape type.
+    * This way of multiplication is bad, because this grows rapidly if you add new color types.
 * Bridge Pattern — The Right Solution:
-    * The irrelevant part (Color) must be provided through a bridge, not baked into the shape hierarchy.
-    * So instead of saying: `Circle is a RedCircle` We say: `Circle has a Color`.
+    * When you have two things that can change independently, you pick one as Abstraction (core functionality) and one as Implementation (additional feature/behavior). 
+    * The Implementation should be handled using a separate interface (called Implementor).
+    * The Abstraction will hold a reference to the Implementorß.
+    * So instead of saying: `Circle is a RedCircle` We say: `Circle has a Red Color`.
     * This means:
         * Shape focuses only on the type of shape (Circle, Square, etc.).
         * Color is provided externally via a bridge (composition).
@@ -85,3 +83,17 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Payment: Checkout, Subscription, Refund [Core Functionality]
+  
+  PaymentGateway: PayPal, Stripe, Razorpay [Additional Feature/Behaviour]
+
+  You can build new types of Payments (e.g., EMI, One-Time)
+
+  You can plug new Gateways anytime — they stay decouple
+* Button: PrimaryButton, IconButton [Core Functionality]
+
+  Theme: DarkTheme, LightTheme [Additional Feature/Behaviour]
+
+  You design a button once and apply any theme dynamically

@@ -1,4 +1,4 @@
-Its a structural design pattern that lets you treat individual objects and groups of objects in the same way. For example, a folder (component) can contain files (leaves) or other folders (composites), but both respond to the same actions like open(), rename(), etc.
+Its a structural design pattern that lets you treat individual objects and groups of objects in the same way. Used when you want to build a tree-like structure (e.g., menus, files, organization hierarchy). For example, a folder (component) can contain files (leaves) or other folders (composites), but both respond to the same actions like open(), rename(), etc. 
 
 #### Key Points:
 * Problem:
@@ -18,7 +18,7 @@ Its a structural design pattern that lets you treat individual objects and group
     * This violates clean coding principles and makes the system hard to extend, maintain, and scale.
 * Problem Analysis:
     * The root cause is:
-        * No unified way to treat individual objects and composite (group) objects.\
+        * No unified way to treat individual objects and composite (group) objects.
     * Client code must check:
         * Is it a file or folder?
         * Is it an employee or a manager?
@@ -41,7 +41,7 @@ Its a structural design pattern that lets you treat individual objects and group
 #### Example:
 Unified Interface
 ```java
-public interface Employee {
+public abstract class Employee {
     private String name;
     private String designation;
 
@@ -77,14 +77,6 @@ public class Developer implements Employee {
         super(name, designation);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
     @Override
     public void showDetails() {
         System.out.println("Name: " + this.name + " Designation: " + this.designation);
@@ -106,7 +98,7 @@ public class Manager implements Employee {
         if(!employees.isEmpty()) {
             System.out.println("Employees under " + this.name);
             for (Employee employee: employees) {
-                System.out.println("Name: " + employee.getName() + " Designation: " + employee.getDesignation());
+                employee.showDetails();
             }
             System.out.println();
         }
@@ -141,3 +133,45 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Spring Boot - Composite Validator using Validator Interface
+    * You can create:
+        * Single Validator (leaf)
+        * Composite Validator that holds multiple validators (composite)
+            ```java
+            public class CompositeValidator implements Validator {
+                private List<Validator> validators;
+
+                public CompositeValidator(List<Validator> validators) {
+                    this.validators = validators;
+                }
+
+                @Override
+                public void validate(Object target, Errors errors) {
+                    validators.forEach(validator -> validator.validate(target, errors));
+                }
+
+                @Override
+                public boolean supports(Class<?> clazz) {
+                    return true;
+                }
+            }
+            ```
+            * You can treat single validators and composite validator the same way — by calling validate()
+            * Composite contains and delegates to other validators
+* Angular - Form Groups & Form Controls
+    * In Angular Reactive Forms:
+        * FormControl = A single field (e.g., input box)
+        * FormGroup = A group of fields (a form section)
+            ```ts
+            const profileForm = new FormGroup({
+                firstName: new FormControl(''),
+                address: new FormGroup({
+                    street: new FormControl(''),
+                    city: new FormControl('')
+                })
+            });
+            ```
+            * You can treat a FormControl and a FormGroup the same way (setValue(), reset())
+            * Both implement the AbstractControl class

@@ -80,3 +80,34 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Spring Boot — JdbcTemplate
+    * JDBC API requires:
+        * Managing connections
+        * Creating statements
+        * Handling exceptions
+        * Closing resources
+    * JdbcTemplate (fascade) Wraps all this logic. You just call simple methods like:
+        ```java
+        jdbcTemplate.queryForObject("SELECT name FROM user WHERE id = ?", String.class, 1);
+        ```
+* Spring Boot - @RestController
+    * The Spring MVC framework involves many layers (DispatcherServlet, HandlerMapping, HandlerAdapter, ViewResolver). You simply write:
+        ```java
+        @RestController
+        public class MyController {
+            @GetMapping("/hello")
+            public String sayHello() {
+                return "Hello!";
+            }
+        }
+        ```
+
+        @RestController + @GetMapping act as a Facade hiding the MVC plumbing.
+* Angular — HttpClient
+    * It works with browser's low-level XMLHttpRequest
+    * It manages headers, parsing JSON, handling errors. You simply writes:
+        ```ts
+        this.http.get('api/users').subscribe(data => console.log(data));
+        ```

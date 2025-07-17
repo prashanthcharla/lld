@@ -1,4 +1,4 @@
-Behavioural pattern which simplifies the communication between the multiple objects by introducing central mediator which manages the interactions. Use this pattern when muliple objects interact in a toghtly coupled way.
+Behavioural pattern which simplifies the communication between the multiple objects by introducing central mediator which manages the interactions. Use this pattern when muliple objects interact (many-to-many) in a tightly coupled way. 
 
 #### Key Points:
 * Problem: 
@@ -120,3 +120,18 @@ public class ChatRoom {
     }
 }
 ```
+
+#### Real-time example:
+* Air Traffic Controller manages planes' communication. ATC is a Mediater here. Planes won't interact directly.
+* UI Widgets Interaction
+    * When a checkbox is checked, a button is enabled
+    * Instead of Checkbox knowing about Button, both interact via Dialog Manager (Mediator)
+        ```java
+        class DialogManager {
+            void notify(Component sender, String event) {
+                if (sender == checkbox && event.equals("checked")) {
+                    button.enable();
+                }
+            }
+        }
+        ```

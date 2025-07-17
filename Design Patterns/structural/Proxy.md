@@ -75,3 +75,40 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Spring Boot — @Transactional
+    * When you annotate a method with @Transactional:
+        ```java
+        @Service
+        public class PaymentService {
+            @Transactional
+            public void processPayment() { /* business logic */ }
+        }
+        ```
+        * Spring creates a proxy for your service.
+        * The proxy adds transaction management (begin, commit, rollback).
+        * Your original PaymentService doesn’t know about transactions.
+* Angular — Proxy Server (e.g., proxy.conf.json)
+    * When developing locally, Angular uses a proxy config to redirect API calls.
+        ```ts
+        // proxy.conf.json
+        {
+            "/api": {
+                "target": "http://localhost:8080",
+                "secure": false
+            }
+        }
+        ```
+    * You call:
+        ```ts
+        this.http.get('/api/users');
+        ```
+        Angular internally sends it to:
+        ```bash
+        http://localhost:8080/api/users
+        ```
+
+        * You're calling /api/users (fake endpoint)
+        * The proxy server forwards your request to the real backend
+        * Angular’s proxy controls access to the backend in dev mode

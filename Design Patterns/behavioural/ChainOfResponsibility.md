@@ -83,3 +83,44 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Angular — HTTP Interceptors
+    ```ts
+    @Injectable()
+    export class AuthInterceptor implements HttpInterceptor {
+        intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+            const cloned = req.clone({ setHeaders: { Authorization: 'Bearer token' } });
+            return next.handle(cloned);  // Passes to next interceptor or backend
+        }
+    }
+    ```
+    ```ts
+    @Injectable()
+    export class LoggingInterceptor implements HttpInterceptor {
+        intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+            console.log("request");
+            return next.handle(cloned);  // Passes to next interceptor or backend
+        }
+    }
+    ```
+    In module,
+    ```ts
+    @NgModule({
+      declarations: [
+        AppComponent
+      ],
+      imports: [
+        BrowserModule,
+        HttpClientModule // Important for HTTP_INTERCEPTORS
+      ],
+      providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
+      ],
+      bootstrap: [AppComponent]
+    })
+    ```
+    * Multiple HTTP interceptors can be chained
+    * Each can modify the request or response
+* Similarly, in Spring Boot as well, we can create HandlerInterceptor Chain.

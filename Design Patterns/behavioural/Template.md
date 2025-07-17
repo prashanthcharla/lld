@@ -135,3 +135,19 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Spring Boot – JdbcTemplate
+    ```java
+    List<User> users = jdbcTemplate.query(
+        "SELECT * FROM users",
+        (rs, rowNum) -> new User(rs.getLong("id"), rs.getString("name"))
+    );
+    ```
+    * You want to query the database. The general steps withing `query` method are always the same:
+        * Open connection
+        * Execute query
+        * Map result
+        * Close connection
+
+    Spring provides JdbcTemplate, which uses the Template Pattern to simplify this. You just injects query & custom behavior (mapping) without changing the structure. So, `query` method above is a template method.

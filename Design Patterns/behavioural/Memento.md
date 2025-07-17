@@ -63,7 +63,7 @@ Originator
 ```java
 public class TextDocument {
     private String text;
-    // other props. Can choose only some out of all properties (state) for restoration.
+    // other props. Possible to choose only some out of all properties (state) for restoration.
 
     public void saveText(String text) {
         this.text = text;
@@ -131,3 +131,15 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Git — Version Control
+    * Each Commit = Memento of project state
+    * You can checkout/revert back to that state
+* Browser — History / Back Button
+    * Each visited page is stored as a Memento in browser history.
+    * You can navigate back (restore previous state).
+* IDE / Text Editor — Undo Functionality
+    * You type text in a document.
+    * Each change creates a Memento (snapshot of text state).
+    * You can Undo to revert back to a previous state.

@@ -23,7 +23,7 @@ Behavioural patten allows the object to change its behaviour when its internal s
         }
         ```
 * Problem Analysis:
-    * Its violating the open/closed principle as we need to modify the existing code upon addition/removel of a state.
+    * Its violating the open/closed principle as we need to modify the existing code upon addition/removal of a state.
     * Hard to extend and maintain.
 * Solution:
     * Use State pattern.
@@ -101,3 +101,11 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Workflow Engine (e.g., Order Processing System)
+    * States: New → Processing → Shipped → Delivered → Cancelled
+    * Each state controls allowed transitions
+* Media Player — Play/Pause/Stop States
+    * States: Playing, Paused, Stopped
+    * Each action depends on the current state

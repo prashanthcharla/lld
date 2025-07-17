@@ -1,4 +1,4 @@
-Behavioural pattern which allows objects (subscribers or observers) to register thier interest in other object's (subject or observable) state changes. When the state changes, all the registered objects will get automatically notified with the changes. This pattern is helpful when we want changes to one part refelect in other parts of the system automatically.
+Behavioural pattern which allows objects (subscribers or observers) to register thier interest in other object's (subject or observable) state changes. When the state changes, all the registered objects will get automatically notified with the changes. It resembles one-to-many relationship. This pattern is helpful when we want changes to one part refelect in other parts of the system automatically.
 
 #### Key Points:
 * Problem: 
@@ -102,3 +102,39 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Frontend (UI) — DOM Event Listeners
+    ```js
+    button.addEventListener('click', () => {
+        console.log('Button clicked!');
+    });
+    ```
+    * Subject: DOM Element
+    * Observer: Callback function (listener)
+    * Browser notifies when event happens
+* Spring Boot - ApplicationEventPublisher
+    ```java
+    @Component
+    public class OrderService {
+        @Autowired
+        private ApplicationEventPublisher eventPublisher;
+
+        public void placeOrder(Order order) {
+            // Business logic
+            eventPublisher.publishEvent(new OrderPlacedEvent(order));
+        }
+    }
+    ```
+    ```java
+    @Component
+    public class InventoryService {
+        @EventListener
+        public void onOrderPlaced(OrderPlacedEvent event) {
+            System.out.println("Updating inventory for order: " + event.getOrder());
+        }
+    }
+    ```
+    * Subject: ApplicationEventPublisher
+    * Observer: @EventListener annotated method
+    * Observer automatically reacts to published events

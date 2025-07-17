@@ -57,7 +57,7 @@ public class ToyotaTire implements Tire {
     }
 }
 ```
-Below interace can be used to create an abstract factory which0 combines the related objects together. 
+Below interace can be used to create an abstract factory which combines the related objects together. 
 ```java
 public interface CarBrandFactory {
     Car createCar();
@@ -111,3 +111,11 @@ public class Test {
     }
 }
 ```
+
+#### Real-time example:
+* In Spring Data JPA, when you enable JPA, Spring Boot uses:
+    * EntityManagerFactory to manage entities
+    * JpaTransactionManager to manage transactions
+* Spring Boot autoconfiguration creates/configures both using shared config (like DataSource, JpaProperties)
+
+

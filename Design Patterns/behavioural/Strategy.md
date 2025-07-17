@@ -21,12 +21,12 @@ Behavioural pattern allows you to define family of algorithms (strategies), enca
     * Use Strategy pattern.
         * Create a Strategy interface with a common method.
         * Implement concrete strategy (algorithm) classes for each type or variation.
-        * A context class (main class which uses different strategies for its functioning) a strategy instance and delegates execution to it.
+        * A context class (main class which uses different strategies for its functioning) will contain a strategy instance and delegates execution to it.
         * Swap strategies based on the need.
         * It provides a way to have easily testable, reusable algorithms.
     * How its different from State design pattern?
         * In State, we pass context to the State because states trigger transition (behaviour & updating context state).
-        * In Strategy, we pass strategy to the context. Context will delegate the work to the chose strategy. Client can play by plugging in different strategies.
+        * In Strategy, we pass strategy to the context. Context will delegate the work to the chosen strategy. Client can play by plugging in different strategies.
 
 #### Example:
 ```java
@@ -93,3 +93,30 @@ public class Main {
     }
 }
 ```
+
+#### Real-time example:
+* Spring Boot RestTemplate with Custom Error Handlers
+    ```java
+    RestTemplate restTemplate = new RestTemplate();
+    restTemplate.setErrorHandler(new CustomResponseErrorHandler());
+    ```
+    * ResponseErrorHandler is a Strategy
+    * You can plug different error handling strategies into RestTemplate
+* Sorting Strategies in Components
+    ```ts
+    export interface SortStrategy {
+    sort(data: any[]): any[];
+    }
+
+    export class NameSortStrategy implements SortStrategy {
+    sort(data: any[]): any[] {
+        return data.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    }
+
+    export class DateSortStrategy implements SortStrategy {
+    sort(data: any[]): any[] {
+        return data.sort((a, b) => a.date - b.date);
+    }
+    }
+    ```
